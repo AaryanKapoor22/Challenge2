@@ -1,11 +1,17 @@
 import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class App extends JFrame {
 
     public App() {
         //Creates a JFrame and defines some basic properties
         super("Repo Creation App");
-        this.setSize(2000, 1600);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        this.setSize((int)width, (int)height);
+        System.out.print((int)width + "height" + (int)height);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
         //Creates and Adds the JPanel to the JFrame
