@@ -5,10 +5,10 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-//A basic subclass of the JLabel with two constructors 
+//A basic subclass of the JLabel with two constructors
 public class label extends JLabel {
-    
-    //Label with text and position 
+
+    //Label with text and position
     public label(String text, int x, int y) {
         super();
         this.setBounds(x, y, 1400, 200);
@@ -19,10 +19,10 @@ public class label extends JLabel {
         this.setBackground(new Color(108 ,180, 198));
     }
 
-    //Label for images with position and size 
+    //Label for images with position and size
     public label(Icon image, int x, int y, int width, int height) {
         super(image);
-        this.setBounds(x, y, width, height); 
+        this.setBounds(x, y, width, height);
     }
 
 }
