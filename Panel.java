@@ -16,7 +16,8 @@ public class Panel extends JPanel {
     private label gitHubImage;
     private label instructionsLabel; 
     private JTextField textbox;
-    private JButton enterButton;
+    private JButton enterButton; 
+    private String folderPath;
 
     public Panel() {
         //Creates and defines basic JPanel properties 
@@ -30,7 +31,16 @@ public class Panel extends JPanel {
         //If the button is pressed search the file director and set the textbox text to the folder path
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textbox.setText(button.selectFile());
+                folderPath = button.selectFile(); 
+                //If folder path not specified return error message
+                if(folderPath.equals("Error")) {
+                    instructionsLabel.setText("Please try again.");
+                } 
+                //Otherwise display selected folder path and give next instruction
+                else {
+                    textbox.setText(folderPath);
+                    instructionsLabel.setText("Create Repo Step");
+                }
             }
         });
         
@@ -38,7 +48,7 @@ public class Panel extends JPanel {
         this.gitHubImage = new label(new ImageIcon("GitHub-Logo.png"), 360, 100, 1280, 720);
 
         //Instructions label
-        this.instructionsLabel = new label("Instructions Here", 300,900); 
+        this.instructionsLabel = new label("Select 'Search Directory' to specify the Repo Folder Path", 300,900); 
 
         //Textbox for user input 
         this.textbox = new JTextField("Enter Input Here!"); 

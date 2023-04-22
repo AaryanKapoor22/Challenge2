@@ -26,7 +26,6 @@ public class button extends JButton {
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            System.out.println(selectedFile.getAbsolutePath());
             return selectedFile.getAbsolutePath();
         }
         else {
