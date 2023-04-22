@@ -1,8 +1,13 @@
 package src;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -21,8 +26,12 @@ public class label extends JLabel {
     }
 
     //Label for images with position and size
-    public label(Icon image, int x, int y, int width, int height) {
-        super(image);
+    public label(ImageIcon image, int x, int y, int width, int height) {
+        super();
+        Image img = image.getImage();
+        Image newImage = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon newIcon = new ImageIcon(newImage);
+        this.setIcon(newIcon);
         this.setBounds(x, y, width, height);
     }
 
