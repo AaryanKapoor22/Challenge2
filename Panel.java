@@ -23,11 +23,11 @@ public class Panel extends JPanel {
         //Creates and defines basic JPanel properties 
         super();
         this.setLayout(null);
-        this.setSize(2000, 1600);
+        this.setSize(App.windowWidth, App.windowHeight);
         this.setBackground(new Color(248 , 240, 227));
 
         //Creates the directory seacrh button 
-        this.searchButton = new button("Directory Search", 100, 1200);
+        this.searchButton = new button("Directory Search", (App.windowWidth/20), (int) (App.windowHeight*0.80));
         //If the button is pressed search the file director and set the textbox text to the folder path
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -45,20 +45,20 @@ public class Panel extends JPanel {
         });
         
         //GitHub Logo Image 
-        this.gitHubImage = new label(new ImageIcon("GitHub-Logo.png"), 360, 100, 1280, 720);
+        this.gitHubImage = new label(new ImageIcon("GitHub-Logo.png"), (int) (App.windowWidth*0.25), (int) (App.windowHeight*0.05), (int) (App.windowWidth/2), (int) (App.windowHeight/2));
 
         //Instructions label
-        this.instructionsLabel = new label("Select 'Search Directory' to specify the Repo Folder Path", 300,900); 
+        this.instructionsLabel = new label("Select 'Search Directory' to specify the Repo Folder Path", (int) (App.windowWidth*0.15), (int) (App.windowHeight*0.60)); 
 
         //Textbox for user input 
         this.textbox = new JTextField("Enter Input Here!"); 
-        this.textbox.setBounds(600, 1200, 800, 100);
+        this.textbox.setBounds((int) (App.windowWidth*0.3), (int) (App.windowHeight*0.80), (int) (App.windowWidth*0.4), (int) (App.windowHeight*0.07));
         this.textbox.setHorizontalAlignment(SwingConstants.CENTER);
         this.textbox.setFont(new Font ("Arial", Font.BOLD, 24));
         this.textbox.setBackground(new Color(108 ,180, 198));
 
         //Enter button for basic control flow 
-        this.enterButton = new button("Enter", 1500, 1200);
+        this.enterButton = new button("Enter", (int) (App.windowWidth*0.75), (int) (App.windowHeight*0.80));
 
         //Adds components to the JPanel
         this.add(searchButton);

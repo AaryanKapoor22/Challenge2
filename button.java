@@ -13,7 +13,7 @@ public class button extends JButton {
     public button(String label, int x, int y) {
         super();
         this.setPreferredSize(new Dimension(400, 100));
-        this.setBounds(x, y, 400, 100);
+        this.setBounds(x, y, (int) (App.windowWidth*0.2), (int) (App.windowHeight*0.07));
         this.setFont(new Font ("Arial", Font.BOLD, 40));
         this.setText(label);
         this.setBackground(new Color(108 ,180, 198));
