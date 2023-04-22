@@ -1,3 +1,4 @@
+package src;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -11,7 +12,7 @@ public class label extends JLabel {
     //Label with text and position
     public label(String text, int x, int y) {
         super();
-        this.setBounds(x, y, 1400, 200);
+        this.setBounds(x, y, (int) (App.windowWidth*0.70), (int) (App.windowHeight*0.15));
         this.setHorizontalAlignment(SwingConstants.CENTER);
         this.setFont(new Font ("Arial", Font.BOLD, 24));
         this.setText(text);
