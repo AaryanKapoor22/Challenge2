@@ -10,6 +10,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import git.tools.client.GitSubprocessClient;
+import github.tools.*;
+import github.tools.client.GitHubApiClient;
+import github.tools.client.RequestParams;
+import github.tools.responseObjects.*;
+
 public class Panel extends JPanel {
 
     //Instance variables 
@@ -22,9 +28,14 @@ public class Panel extends JPanel {
     private boolean collectPath;
     private String username; 
     private boolean collectUsername; 
+    private boolean collectRepoName; 
     private String token;
+    private String repoName;
     private boolean collectToken; 
     private boolean allowCreateRepo;
+
+    private RequestParams requestParams;
+    private GitHubApiClient gitHubApiClient;
 
     public Panel() {
         //Creates and defines basic JPanel properties 
@@ -37,9 +48,12 @@ public class Panel extends JPanel {
         collectUsername = false;
         collectToken = false; 
         allowCreateRepo = false;
+        collectRepoName=false;
 
         //Creates the directory seacrh button 
         this.searchButton = new button("Directory Search", (App.windowWidth/20), (int) (App.windowHeight*0.80));
+        this.searchButton.setFont(new Font ( searchButton.getFont().toString(), Font.BOLD, 20));
+        searchButton.getFont();
         //If the button is pressed search the file director and set the textbox text to the folder path
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -51,9 +65,12 @@ public class Panel extends JPanel {
                     } 
                     //Otherwise display selected folder path and give next instruction
                     else {
-                        instructionsLabel.setText("Folder Path: " + folderPath + ". Please enter GitHub Username and Select 'Enter'");
+                        instructionsLabel.setText("Please enter GitHub Username and Select 'Enter'");
                         collectPath = false;
                         collectUsername = true;
+                    // Set Directory background color to grey and disable it
+                        searchButton.setBackground(Color.GRAY);
+                        searchButton.setEnabled(false);
                     }
                 }
             }
@@ -64,7 +81,7 @@ public class Panel extends JPanel {
 
         //Instructions label
         this.instructionsLabel = new label("Input the Repo Folder Path and Select 'Enter' or Select 'Search Directory' to browse for the Repo Folder Path", (int) (App.windowWidth*0.15), (int) (App.windowHeight*0.60)); 
-
+        instructionsLabel.setFont(new Font ( instructionsLabel.getFont().toString(), Font.BOLD, 12));
         //Textbox for user input 
         this.textbox = new JTextField("Enter Input Here!"); 
         this.textbox.setBounds((int) (App.windowWidth*0.3), (int) (App.windowHeight*0.80), (int) (App.windowWidth*0.4), (int) (App.windowHeight*0.07));
@@ -80,8 +97,8 @@ public class Panel extends JPanel {
                 if(collectPath == true) {
                     folderPath = textbox.getText();
                     collectPath = false;
-                    collectUsername = true; 
-                    instructionsLabel.setText("Folder Path: " + folderPath + ". Please enter GitHub Username and Select 'Enter'");
+                    collectUsername = true;
+                    instructionsLabel.setText("Folder Path: " + folderPath + ". Please enter GitHub Username and Select 'Enter'");      
                 }
                 //Collects GitHub Username
                 else if(collectUsername == true) {
@@ -94,19 +111,38 @@ public class Panel extends JPanel {
                 else if(collectToken == true) {
                     token = textbox.getText();
                     collectToken = false; 
+                    collectRepoName = true;
+                    instructionsLabel.setText("Please enter the Repo Name: "); 
+                }
+                else if(collectRepoName == true) {
+                    repoName = textbox.getText();
+                    collectRepoName = false; 
                     allowCreateRepo = true;
                     instructionsLabel.setText("Thank you. Please Select 'Create Repo' to Create Repo now..."); 
+                    textbox.setBackground(Color.GRAY);
+                    textbox.setEnabled(false);
                     enterButton.setText("Create Repo");
                 } 
                 //Initiates Repo Creation
-                else if(allowCreateRepo = true) {
+                else if(allowCreateRepo = true) {       
                     instructionsLabel.setText("Repo is now Being Created!");
-                    //Launch Repo Creation From HERE
+
+                    gitHubApiClient = new GitHubApiClient(username,token);
+                    requestParams = new RequestParams();
+                    requestParams.addParam("name", repoName);                   
+
+                    CreateRepoResponse createRepoResponse = gitHubApiClient.createRepo(requestParams);
+                    GitSubprocessClient gitSubprocessClient = new GitSubprocessClient(folderPath);
+                    String gitInit = gitSubprocessClient.gitInit();
+                    instructionsLabel.setText("Repo Has Been Created!");
+                    enterButton.setEnabled(false);
+                    enterButton.setBackground(Color.GRAY);
                 }
                 //Otherwise Returns Error Message
                 else {
                     System.out.println("Error: Nothing to Collect");
                 }
+                textbox.setText("Enter Input Here!");
             }
         });  
 
