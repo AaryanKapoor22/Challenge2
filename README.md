@@ -1,4 +1,4 @@
-#BetterThanGitDesktop
+# BetterThanGitDesktop
 
 ## Description
 BetterThanGitDesktop is a GUI application that simplifies the process of converting an existing project on your computer to a Git repository and pushing it to GitHub. The application performs the following tasks:
