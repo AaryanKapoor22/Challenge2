@@ -18,29 +18,43 @@ public class Panel extends JPanel {
     private label instructionsLabel; 
     private JTextField textbox;
     private JButton enterButton; 
-    private String folderPath;
+    private String folderPath; 
+    private boolean collectPath;
+    private String username; 
+    private boolean collectUsername; 
+    private String token;
+    private boolean collectToken; 
+    private boolean allowCreateRepo;
 
     public Panel() {
         //Creates and defines basic JPanel properties 
         super();
         this.setLayout(null);
         this.setSize(App.windowWidth, App.windowHeight);
-        this.setBackground(new Color(248 , 240, 227));
+        this.setBackground(new Color(248 , 240, 227)); 
+
+        collectPath = true;
+        collectUsername = false;
+        collectToken = false; 
+        allowCreateRepo = false;
 
         //Creates the directory seacrh button 
         this.searchButton = new button("Directory Search", (App.windowWidth/20), (int) (App.windowHeight*0.80));
         //If the button is pressed search the file director and set the textbox text to the folder path
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                folderPath = button.selectFile(); 
-                //If folder path not specified return error message
-                if(folderPath.equals("Error")) {
-                    instructionsLabel.setText("Please try again.");
-                } 
-                //Otherwise display selected folder path and give next instruction
-                else {
-                    textbox.setText(folderPath);
-                    instructionsLabel.setText("Create Repo Step");
+                if(collectPath == true) {
+                    folderPath = button.selectFile(); 
+                    //If folder path not specified return error message
+                    if(folderPath.equals("Error")) {
+                        instructionsLabel.setText("Please try again.");
+                    } 
+                    //Otherwise display selected folder path and give next instruction
+                    else {
+                        instructionsLabel.setText("Folder Path: " + folderPath + ". Please enter GitHub Username and Select 'Enter'");
+                        collectPath = false;
+                        collectUsername = true;
+                    }
                 }
             }
         });
@@ -49,7 +63,7 @@ public class Panel extends JPanel {
         this.gitHubImage = new label(new ImageIcon("GitHub-Logo.png"), (int) (App.windowWidth*0.25), (int) (App.windowHeight*0.05), (int) (App.windowWidth/2), (int) (App.windowHeight/2));
 
         //Instructions label
-        this.instructionsLabel = new label("Select 'Search Directory' to specify the Repo Folder Path", (int) (App.windowWidth*0.15), (int) (App.windowHeight*0.60)); 
+        this.instructionsLabel = new label("Input the Repo Folder Path and Select 'Enter' or Select 'Search Directory' to browse for the Repo Folder Path", (int) (App.windowWidth*0.15), (int) (App.windowHeight*0.60)); 
 
         //Textbox for user input 
         this.textbox = new JTextField("Enter Input Here!"); 
@@ -60,6 +74,41 @@ public class Panel extends JPanel {
 
         //Enter button for basic control flow 
         this.enterButton = new button("Enter", (int) (App.windowWidth*0.75), (int) (App.windowHeight*0.80));
+        enterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Collects Folder Path
+                if(collectPath == true) {
+                    folderPath = textbox.getText();
+                    collectPath = false;
+                    collectUsername = true; 
+                    instructionsLabel.setText("Folder Path: " + folderPath + ". Please enter GitHub Username and Select 'Enter'");
+                }
+                //Collects GitHub Username
+                else if(collectUsername == true) {
+                    username = textbox.getText();
+                    collectUsername = false;
+                    collectToken = true; 
+                    instructionsLabel.setText("Username: " + username + ". Please enter GitHub Token and Select 'Enter;");
+                }
+                //Collects GitHub Password
+                else if(collectToken == true) {
+                    token = textbox.getText();
+                    collectToken = false; 
+                    allowCreateRepo = true;
+                    instructionsLabel.setText("Thank you. Please Select 'Create Repo' to Create Repo now..."); 
+                    enterButton.setText("Create Repo");
+                } 
+                //Initiates Repo Creation
+                else if(allowCreateRepo = true) {
+                    instructionsLabel.setText("Repo is now Being Created!");
+                    //Launch Repo Creation From HERE
+                }
+                //Otherwise Returns Error Message
+                else {
+                    System.out.println("Error: Nothing to Collect");
+                }
+            }
+        });  
 
         //Adds components to the JPanel
         this.add(searchButton);

@@ -24,4 +24,6 @@ hs_err_pid*
 
 GitSubprocessClient-v0.0.12.jar
 .vscode
-GitHubApiClient-v0.0.7.jar
+GitHubApiClient-v0.0.7.jar 
+
+credentials.txt
