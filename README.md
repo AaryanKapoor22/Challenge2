@@ -3,16 +3,10 @@
 ## Description
 BetterThanGitDesktop is a GUI application that simplifies the process of converting an existing project on your computer to a Git repository and pushing it to GitHub. The application performs the following tasks:
 - Converts a project on the user's computer to a Git repository
-- Adds a Git Ignore file to the project to exclude common files/patterns
-- Adds a ReadMe file with the name of the project as a markdown header
 - Creates an initial commit in the Git repository
 - Creates a GitHub repository that mirrors the Git repository on the user's computer
-- Allows the user to set the repository's description and visibility (private or public)
-- Sets the Git repository's remote to the GitHub repository as "origin"
-- Pushes the initial commit to the GitHub repository
-- Provides the user with a URL to their newly created GitHub repository
 
-The application is a prototype, and error handling is minimal, with only a simple error message displayed if the steps are not carried out correctly. The GUI design is basic and includes the Github Logo, as well as a disclaimer stating that the application is a prototype and not yet meant for commercial use.
+The application is a prototype, and error handling is decent but some places might not have it implemented, with only a simple error message displayed if the steps are not carried out correctly. The GUI design is basic and includes the Github Logo, as well as a disclaimer stating that the application is a prototype and not yet meant for commercial use.
 
 ## Requirements
 - Java 8 or later version
