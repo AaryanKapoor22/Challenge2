@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Challenge2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Challenge2_jar</output-path>
+    <root id="archive" name="Challenge2.jar">
+      <element id="module-output" name="Challenge2" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/GitHubApiClient-v0.0.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/GitSubprocessClient-v0.0.12.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/GitHub-Logo.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/GitHub-Logo.png" />
+    </root>
+  </artifact>
+</component>

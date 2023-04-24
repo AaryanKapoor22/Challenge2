@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Challenge2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/GitSubprocessClient-v0.0.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/GitHubApiClient-v0.0.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
