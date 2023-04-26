@@ -21,8 +21,9 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-
 .idea
+META-INF
+/.idea
 /META-INF
 /out
 
@@ -31,3 +32,5 @@ GitSubprocessClient-v0.0.12.jar
 GitHubApiClient-v0.0.7.jar 
 
 credentials.txt
+/META-INF/
+/.idea/
