@@ -143,7 +143,7 @@ public class Panel extends JPanel {
                     instructionsLabel.setText("Please enter the Repo Name: ");
                 }
                 else if(collectRepoName == true) {
-                    repoName = textbox.getText();
+                    repoName = textbox.getText().replaceAll("\\s", "-");
                     System.out.println("repo name"+repoName);
                     collectRepoName = false; 
                     allowCreateRepo = true;
@@ -211,6 +211,8 @@ public class Panel extends JPanel {
                     GetRepoInfoResponse repoDesc = gitHubApiClient.getRepoInfo(username, repoName);
 
                     String url = repoDesc.getUrl();
+                    //String newUrl = url//.replaceAll("\\s", "-");
+                    System.out.println(url);
                     String remoteAdd = gitSubprocessClient.gitRemoteAdd("origin", url + ".git");
 
                     String originPush = gitSubprocessClient.gitPush("master");
